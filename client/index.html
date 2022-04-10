@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewpoint" content="width=device-width, initial-scale=1" />
+    <title>Back End Assessment</title>
+  </head>
+
+  <body class="container">
+    <h1 id="title">
+      Life is like a box of chocolates, you never know what you're gonna get!
+    </h1>
+    <br />
+
+    <div class="buttons">
+      <button id="complimentButton">Get a compliment</button>
+      <button id="fortuneButton">Get a Fortune</button>
+      <button id="sexyfortuneButton">Get a Sexy Fortune</button>
+      <button id="weeklyLuckyButton">Weekly lucky numbers</button>
+    </div>
+    <br />
+
+    <div id="content">
+      <h1>Magic 8 Ball on Maria's Channel</h1>
+      <p>Ask me what you want to know and click on the Magic 8 Ball</p>
+      <input type="text" id="question" />
+      <br /><br />
+      <div id="eight-ball" class="eight-ball">
+        <div class="answer">
+          <p id="eight">8</p>
+          <p id="answer"></p>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div id="myDIV" class="header">
+      <h2 style="margin: 5px">My Daily To Do List</h2>
+      <input type="text" id="myInput" placeholder="Title..." />
+      <span onclick="newElement()" class="addBtn">Add</span>
+    </div>
+
+    <ul id="myUL">
+      <li>Hit the gym</li>
+      <li>Buy eggs</li>
+      <li>Read a book</li>
+      <li>Organize office</li>
+    </ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
