@@ -2,6 +2,13 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+let idCount = 3
+const todoList = [
+  {'id': 0, 'name': 'Hit the gym'},
+  {'id': 1, 'name': 'Buy eggs'},
+  {'id': 2, 'name': 'Read a book'},
+  {'id': 3, 'name': 'Organize office'}
+]
 
 app.use(cors());
 
@@ -65,12 +72,48 @@ app.get("/api/weekly", (req, res) => {
   res.status(200).send(randomWeekly);
 });
 
-// app.post("/api/todo", (req, res) => {
-//   inputValue.push(req.data)
-//   res.status(200).send('You have added successfully')
-// });
+app.get("/api/todo/list", (req, res) => {
+  res.status(200).send({'todos': todoList})
+})
 
+app.post("/api/todo", (req, res) => {
+  let {todo} = req.body
+  // assign and ID and put it in the list
+  // send to the frontend
+  idCount = ++idCount
+  saveObj = {'id': idCount, 'name': todo}
+  todoList.push(saveObj)
+  res.status(200).send({'responseMessage': `${todo}, has been successfully added.`, 'obj': saveObj})
+})
 
+app.put("/api/todo/:id", (req, res) => {
+  let id  = parseInt(req.params.id)
+  let todo = req.body
+  if (id != todo.id) {
+    res.status(400).send("Todo invalid.")
+    return
+  }
+  let name = req.body.name
+  for (let i = 0; i < todoList.length; i++) {
+    if (todoList[i].id === req.body.id) {
+      todoList[i].name = name
+      res.status(200).send("Todo updated.")
+      return
+    }
+  }
+  res.status(400).send("Todo not found.")
+})
 
+app.delete("/api/todo/:id", (req, res) => {
+  let id  = parseInt(req.params.id)
+  for (let i = 0; i < todoList.length; i++) {
+    if (todoList[i].id === id) {
+      todoList.splice(i, 1)
+      res.status(200).send("Todo deleted.")
+      return
+    }
+  }
+  res.status(400).send("Todo not found.")
+})
 
 app.listen(4000, () => console.log("Server running on 4000"));
